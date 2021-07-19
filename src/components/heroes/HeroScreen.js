@@ -1,14 +1,17 @@
 import React, { useMemo } from 'react'
 import { Redirect, useParams } from 'react-router-dom'
 import { getHeroesById } from '../../selectors/getHeroById';
+//const batman = '../../assets/heroes/dc-batman.jpg'
+const heroImages = require.context('../../assets/heroes', true);
 
 export const HeroScreen = ({ history }) => {
 
     const { heroeId } = useParams();
 
-    
-    const hero =   useMemo(() => getHeroesById(heroeId),[heroeId])
-    
+
+    const hero = useMemo(() => getHeroesById(heroeId), [heroeId])
+    //console.log('Hero: '+hero+" heroeId: "+heroeId)
+
     if (!hero) {
         return <Redirect to="/"></Redirect>
     }
@@ -31,12 +34,16 @@ export const HeroScreen = ({ history }) => {
 
     } = hero;
 
-
+    //console.log(heroImages(`./dc-superman.jpg`))
 
     return (
         <div className="row mt-5 ">
             <div className="col-4">
-                <img src={`../assets/heroes/${heroeId}.jpg`}
+                <img
+                    // src={`../assets/heroes/${heroeId}.jpg`} desde public assets
+                   // src={batman}  
+                    src={ heroImages(`./${heroeId}.jpg`).default }
+                    alt={superhero}
                     className="img-thumbnail animate__animated animate__fadeInLeft"
                 />
 

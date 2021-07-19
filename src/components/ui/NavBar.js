@@ -10,6 +10,9 @@ export const Navbar = () => {
     const { user, dispatch } = useContext(AuthContext);
     const history = useHistory();
     const handleLogout = () => {
+
+        console.log('onClick activado')
+
         dispatch({
             type: types.logout
         })
